@@ -8,35 +8,30 @@ import com.neuedu.util.ImageMap;
 
 import java.awt.*;
 
-public class Background extends BaseSprite implements Moveable, Drawable {
+public class Bullet extends BaseSprite implements Drawable, Moveable {
+     private  Image image;
+     private int speed=FrameConstant.GAME_SPEED*5;
 
-    private  Image image;
-
-    public Background() {
-        this(0, FrameConstant.FRAME_HEIGHT-ImageMap.get("bg01").getHeight(null), ImageMap.get("bg01"));
+    public Bullet() {
+        this(0,0, ImageMap.get("mb01"));
 
     }
 
-    public Background(int x, int y, Image image) {
+    public Bullet(int x, int y, Image image) {
         super(x, y);
         this.image = image;
     }
 
     @Override
-    public void move() {
-        setY(getY() + FrameConstant.GAME_SPEED);
-
+    public void draw(Graphics g) {
+        g.drawImage(image,getX(),getY(),image.getWidth(null),image.getHeight(null),null);
+        move();
 
     }
 
     @Override
-    public void draw(Graphics g) {
-
-        g.drawImage(image,getX(),getY(),image.getWidth(null),image.getHeight(null),null);
-        move();
-
+    public void move() {
+        setY(getY()- speed);
 
     }
 }
-
-

@@ -1,13 +1,13 @@
 package com.neuedu.base;
 
-public class BaceSprite  {
+public class BaseSprite {
     private int x;
     private int y;
 
-    public BaceSprite() {
+    public BaseSprite() {
     }
 
-    public BaceSprite(int x, int y) {
+    public BaseSprite(int x, int y) {
         this.x = x;
         this.y = y;
     }
