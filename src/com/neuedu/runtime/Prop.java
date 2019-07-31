@@ -9,19 +9,17 @@ import com.neuedu.util.DataStore;
 import com.neuedu.util.ImageMap;
 
 import java.awt.*;
-import java.util.List;
 
-public class EnemyBullet extends BaseSprite implements Drawable, Moveable {
+public class Prop extends BaseSprite implements Drawable, Moveable {
     private Image image;
     private int speed = FrameConstant.GAME_SPEED*5;
 
-    public EnemyBullet( ) {
-        this(0,0, ImageMap.get("epb01"));
 
-
+    public Prop() {
+        this(0,0, ImageMap.get("blood"));
     }
 
-    public EnemyBullet(int x, int y, Image image) {
+    public Prop(int x, int y,Image image) {
         super(x, y);
         this.image = image;
     }
@@ -38,31 +36,37 @@ public class EnemyBullet extends BaseSprite implements Drawable, Moveable {
     public void move() {
         setY(getY()+speed);
         boderTesting();
+
     }
+
 
     public void boderTesting(){
         if (getY()>FrameConstant.FRAME_HEIGHT){
             GameFrame gameFrame = DataStore.get("gameFrame");
-            gameFrame.enemyBulletList.remove(this);
+            gameFrame.propList.remove(this);
         }
     }
+
 
     public Rectangle getRectangle(){
         return new Rectangle(getX(),getY(),image.getWidth(null),image.getHeight(null));
     }
 
+
     public void collisionTesting(Plane plane){
         GameFrame gameFrame = DataStore.get("gameFrame");
-        EnemyPlane enemyPlane = new EnemyPlane();
-        if (plane.getRectangle().intersects(this.getRectangle())) {
-            gameFrame.enemyBulletList.remove(this);
-            gameFrame.hp-=enemyPlane.getType()*5;
-            if (gameFrame.hp<=0){
-                gameFrame.gameOver = true;
 
+        if (plane.getRectangle().intersects(this.getRectangle())) {
+            gameFrame.propList.remove(this);
+            if (gameFrame.hp<100){
+                gameFrame.hp+= 10;
+                if (gameFrame.hp>100){
+                    gameFrame.hp=100;
+                }
             }
 
         }
-        }
+    }
+
 
 }

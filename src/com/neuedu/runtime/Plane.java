@@ -17,7 +17,10 @@ public class Plane extends BaseSprite implements Drawable, Moveable {
     private Image image;
     private int speed=FrameConstant.GAME_SPEED*5;
     private boolean fire;
+
     private int index = 0;
+
+
 
 
 
@@ -39,6 +42,7 @@ public class Plane extends BaseSprite implements Drawable, Moveable {
         g.drawImage(image,getX(),getY(),image.getWidth(null),image.getHeight(null),null);
         move();
         fire();
+
        index++;
        if (fire){
           if (index>=10){
@@ -49,17 +53,20 @@ public class Plane extends BaseSprite implements Drawable, Moveable {
 
 
     }
-    public void fire(){
-        if (fire && index ==0    ) {
-          GameFrame gameFrame =    DataStore.get("gameFrame");
-          gameFrame.bulletList.add(new Bullet(
-                  getX()+ (image.getWidth(null)/2) - ImageMap.get("mb01").getWidth(null)/2,
-                  getY() - ImageMap.get("mb01").getHeight(null),
-                  ImageMap.get("mb01")
-          ));
+    public void fire() {
 
+
+        if (fire && index == 0) {
+            GameFrame gameFrame = DataStore.get("gameFrame");
+            gameFrame.bulletList.add(new Bullet(
+                    getX() + (image.getWidth(null) / 2) - ImageMap.get("mb01").getWidth(null) / 2,
+                    getY() - ImageMap.get("mb01").getHeight(null),
+                    ImageMap.get("mb01")
+            ));
         }
-   }
+    }
+
+
 
     @Override
     public void move() {
@@ -115,11 +122,11 @@ public class Plane extends BaseSprite implements Drawable, Moveable {
         }
         if(e.getKeyCode() == KeyEvent.VK_J){
               fire = true;
-
-
         }
-
     }
+
+
+
 
 
     public void keyReleased(KeyEvent e) {
@@ -145,6 +152,9 @@ public class Plane extends BaseSprite implements Drawable, Moveable {
             fire = false;
 
         }
+
+
+
 
     }
     public Rectangle getRectangle(){

@@ -53,7 +53,7 @@ public class EnemyPlane extends BaseSprite implements Drawable, Moveable {
     public void fire(){
         GameFrame gameFrame =    DataStore.get("gameFrame");
         if (getY()>0){
-            if (random.nextInt(1000)>985){
+            if (random.nextInt(1000)>990){
                 gameFrame.enemyBulletList.add(new EnemyBullet(
                         getX()+ (image.getWidth(null)/2) - ImageMap.get("epb01").getWidth(null)/2,
                         getY()+image.getHeight(null)/2 - ImageMap.get("epb01").getHeight(null)/2
@@ -103,5 +103,20 @@ public class EnemyPlane extends BaseSprite implements Drawable, Moveable {
     }
     public Rectangle getRectangle(){
          return new Rectangle(getX(),getY(),image.getWidth(null),image.getHeight(null));
+    }
+
+
+    public void collisionTesting(Plane plane){
+        GameFrame gameFrame = DataStore.get("gameFrame");
+        EnemyPlane enemyPlane = new EnemyPlane();
+        if (plane.getRectangle().intersects(this.getRectangle())) {
+            gameFrame.enemyPlaneList.remove(this);
+            gameFrame.hp-=enemyPlane.getType()*5;
+            if (gameFrame.hp<=0){
+                gameFrame.gameOver = true;
+
+            }
+
+        }
     }
 }
