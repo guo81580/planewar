@@ -33,6 +33,8 @@ public class GameFrame extends Frame {
     //创建敌方飞机
     public  final List<EnemyPlane> enemyPlaneList = new CopyOnWriteArrayList<>();
     public boolean gameOver = false;
+    public int score=0;
+    public int hp=100;
 
 
 
@@ -60,10 +62,15 @@ public class GameFrame extends Frame {
                 bullet.collisionTesting(enemyPlaneList);
             }
             for (EnemyBullet enemyBullet : enemyBulletList) {
-                enemyBullet.collisionTesting(plane);
+           enemyBullet.collisionTesting(plane);
             }
-//        g.setColor(Color.red);
-//        g.drawString(""+enemyPlaneList.size(),100,100);
+            g.setFont(new Font("楷体",Font.BOLD,25));
+
+            g.setColor(new Color(60, 255, 164));
+
+            g.drawString("得分："+score,20,60);
+
+            g.drawString("生命值："+hp,520,60);
 
         }
 
@@ -115,10 +122,10 @@ public class GameFrame extends Frame {
 
 
         //游戏初始时添加一些敌方飞机
-        enemyPlaneList.add(new EnemyPlane(100,30, ImageMap.get("ep01")));
-        enemyPlaneList.add(new EnemyPlane(200,30, ImageMap.get("ep01")));
-        enemyPlaneList.add(new EnemyPlane(300,30, ImageMap.get("ep01")));
-        enemyPlaneList.add(new EnemyPlane(400,30, ImageMap.get("ep01")));
+        enemyPlaneList.add(new EnemyPlane(100,-900,  1));
+        enemyPlaneList.add(new EnemyPlane(360,-600,  1));
+        enemyPlaneList.add(new EnemyPlane(550,-400,  1));
+        enemyPlaneList.add(new EnemyPlane( 0,30,  2));
         setVisible(true);
 
     }

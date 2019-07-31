@@ -15,9 +15,11 @@ import java.awt.event.KeyEvent;
 public class Plane extends BaseSprite implements Drawable, Moveable {
     private  boolean up,right,down,left;
     private Image image;
-    private int speed=FrameConstant.GAME_SPEED*2;
+    private int speed=FrameConstant.GAME_SPEED*5;
     private boolean fire;
     private int index = 0;
+
+
 
 
     public Plane() {
@@ -48,7 +50,7 @@ public class Plane extends BaseSprite implements Drawable, Moveable {
 
     }
     public void fire(){
-        if (fire && index ==0) {
+        if (fire && index ==0    ) {
           GameFrame gameFrame =    DataStore.get("gameFrame");
           gameFrame.bulletList.add(new Bullet(
                   getX()+ (image.getWidth(null)/2) - ImageMap.get("mb01").getWidth(null)/2,

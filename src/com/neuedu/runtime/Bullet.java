@@ -55,6 +55,7 @@ public class Bullet extends BaseSprite implements Drawable, Moveable {
             if (enemyPlane.getRectangle().intersects(this.getRectangle())){
                 enemyPlaneList.remove(enemyPlane);
                 gameFrame.bulletList.remove(this);
+                gameFrame.score+= enemyPlane.getType()*5;
 
             }
         }
