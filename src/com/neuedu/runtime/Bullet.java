@@ -4,9 +4,12 @@ import com.neuedu.base.BaseSprite;
 import com.neuedu.base.Drawable;
 import com.neuedu.base.Moveable;
 import com.neuedu.constant.FrameConstant;
+import com.neuedu.main.GameFrame;
+import com.neuedu.util.DataStore;
 import com.neuedu.util.ImageMap;
 
 import java.awt.*;
+import java.util.List;
 
 public class Bullet extends BaseSprite implements Drawable, Moveable {
      private  Image image;
@@ -26,6 +29,7 @@ public class Bullet extends BaseSprite implements Drawable, Moveable {
     public void draw(Graphics g) {
         g.drawImage(image,getX(),getY(),image.getWidth(null),image.getHeight(null),null);
         move();
+        borderTesting();
 
     }
 
@@ -33,5 +37,26 @@ public class Bullet extends BaseSprite implements Drawable, Moveable {
     public void move() {
         setY(getY()- speed);
 
+    }
+    public void borderTesting(){
+        if (getY()<30-image.getHeight(null)){
+           GameFrame gameFrame = DataStore.get("gameFrame");
+           gameFrame.bulletList.remove(this);
+
+        }
+    }
+    public Rectangle getRectangle(){
+        return new Rectangle(getX(),getY(),image.getWidth(null),image.getHeight(null));
+
+    }
+    public void collisionTesting(List<EnemyPlane> enemyPlaneList){
+        GameFrame gameFrame = DataStore.get("gameFrame");
+        for (EnemyPlane enemyPlane : enemyPlaneList) {
+            if (enemyPlane.getRectangle().intersects(this.getRectangle())){
+                enemyPlaneList.remove(enemyPlane);
+                gameFrame.bulletList.remove(this);
+
+            }
+        }
     }
 }

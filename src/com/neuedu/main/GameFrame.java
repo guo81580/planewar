@@ -1,9 +1,8 @@
 package com.neuedu.main;
 
 import com.neuedu.constant.FrameConstant;
-import com.neuedu.runtime.Background;
-import com.neuedu.runtime.Bullet;
-import com.neuedu.runtime.Plane;
+import com.neuedu.runtime.*;
+import com.neuedu.util.ImageMap;
 
 import java.awt.*;
 import java.util.List;
@@ -12,23 +11,61 @@ import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
-
+import java.util.concurrent.CopyOnWriteArrayList;
+import java.util.concurrent.ForkJoinPool;
 
 
 public class GameFrame extends Frame {
+
+
     //创建背景对象
     private Background background = new Background();
 
     //创建飞机对象
-    private Plane plane = new Plane();
+    private Plane plane = new Plane( );
 
     //创建子弹集合
-    private List<Bullet> bulletList = new ArrayList<>();
+    public final List<Bullet> bulletList = new CopyOnWriteArrayList<>();
+
+    //创建敌方飞机子弹集合
+    public final List<EnemyBullet> enemyBulletList = new CopyOnWriteArrayList<>();
+
+    //创建敌方飞机
+    public  final List<EnemyPlane> enemyPlaneList = new CopyOnWriteArrayList<>();
+    public boolean gameOver = false;
+
+
 
     @Override
     public void paint(Graphics g) {
-        background.draw(g);
-        plane.draw(g);
+        if (!gameOver){
+            background.draw(g);
+            plane.draw(g);
+            for (Bullet bullet : bulletList) {
+                bullet.draw(g);
+            }
+
+            for (EnemyBullet enemyBullet : enemyBulletList) {
+                enemyBullet.draw(g);
+            }
+
+            for (EnemyBullet enemyBullet : enemyBulletList) {
+                enemyBullet.draw(g);
+            }
+
+            for (EnemyPlane enemyPlane : enemyPlaneList) {
+                enemyPlane.draw(g);
+            }
+            for (Bullet bullet : bulletList) {
+                bullet.collisionTesting(enemyPlaneList);
+            }
+            for (EnemyBullet enemyBullet : enemyBulletList) {
+                enemyBullet.collisionTesting(plane);
+            }
+//        g.setColor(Color.red);
+//        g.drawString(""+enemyPlaneList.size(),100,100);
+
+        }
 
     }
     public void init(){
@@ -77,6 +114,11 @@ public class GameFrame extends Frame {
         }.start();
 
 
+        //游戏初始时添加一些敌方飞机
+        enemyPlaneList.add(new EnemyPlane(100,30, ImageMap.get("ep01")));
+        enemyPlaneList.add(new EnemyPlane(200,30, ImageMap.get("ep01")));
+        enemyPlaneList.add(new EnemyPlane(300,30, ImageMap.get("ep01")));
+        enemyPlaneList.add(new EnemyPlane(400,30, ImageMap.get("ep01")));
         setVisible(true);
 
     }

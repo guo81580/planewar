@@ -4,6 +4,8 @@ import com.neuedu.base.BaseSprite;
 import com.neuedu.base.Drawable;
 import com.neuedu.base.Moveable;
 import com.neuedu.constant.FrameConstant;
+import com.neuedu.main.GameFrame;
+import com.neuedu.util.DataStore;
 import com.neuedu.util.ImageMap;
 
 import java.awt.*;
@@ -14,6 +16,9 @@ public class Plane extends BaseSprite implements Drawable, Moveable {
     private  boolean up,right,down,left;
     private Image image;
     private int speed=FrameConstant.GAME_SPEED*2;
+    private boolean fire;
+    private int index = 0;
+
 
     public Plane() {
         this((FrameConstant.FRAME_WIDTH - ImageMap.get("my01").getWidth(null))/2,
@@ -31,10 +36,28 @@ public class Plane extends BaseSprite implements Drawable, Moveable {
 
         g.drawImage(image,getX(),getY(),image.getWidth(null),image.getHeight(null),null);
         move();
+        fire();
+       index++;
+       if (fire){
+          if (index>=10){
+              index=0;
+       }
+       }
 
 
 
     }
+    public void fire(){
+        if (fire && index ==0) {
+          GameFrame gameFrame =    DataStore.get("gameFrame");
+          gameFrame.bulletList.add(new Bullet(
+                  getX()+ (image.getWidth(null)/2) - ImageMap.get("mb01").getWidth(null)/2,
+                  getY() - ImageMap.get("mb01").getHeight(null),
+                  ImageMap.get("mb01")
+          ));
+
+        }
+   }
 
     @Override
     public void move() {
@@ -88,6 +111,11 @@ public class Plane extends BaseSprite implements Drawable, Moveable {
             left = true;
 
         }
+        if(e.getKeyCode() == KeyEvent.VK_J){
+              fire = true;
+
+
+        }
 
     }
 
@@ -110,5 +138,14 @@ public class Plane extends BaseSprite implements Drawable, Moveable {
 
         }
 
+        if(e.getKeyCode() == KeyEvent.VK_J){
+           // fire();
+            fire = false;
+
+        }
+
+    }
+    public Rectangle getRectangle(){
+        return new Rectangle(getX(),getY(),image.getWidth(null),image.getHeight(null));
     }
 }
