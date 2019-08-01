@@ -76,13 +76,13 @@ public class GameFrame extends Frame {
 
 
 
-            if (random.nextInt(1000)>990){
+            if (random.nextInt(1000)>995){
                 enemyPlaneList.add(new EnemyPlane(random.nextInt(700),0,1 ));
             }
-            if (random.nextInt(1000)>990){
+            if (random.nextInt(1000)>995){
                 enemyPlaneList.add(new EnemyPlane(random.nextInt(700),0,2 ));
             }
-            if (random.nextInt(1000)>995){
+            if (random.nextInt(1000)>998){
                 enemyPlaneList.add(new EnemyPlane(random.nextInt(700),250,5 ));
             }
             if (random.nextInt(1000)>995){
