@@ -27,8 +27,9 @@ public class Bullet extends BaseSprite implements Drawable, Moveable {
 
     @Override
     public void draw(Graphics g) {
-        g.drawImage(image,getX(),getY(),image.getWidth(null),image.getHeight(null),null);
         move();
+        g.drawImage(image,getX(),getY(),image.getWidth(null),image.getHeight(null),null);
+
         borderTesting();
 
     }
@@ -49,15 +50,26 @@ public class Bullet extends BaseSprite implements Drawable, Moveable {
         return new Rectangle(getX(),getY(),image.getWidth(null),image.getHeight(null));
 
     }
-    public void collisionTesting(List<EnemyPlane> enemyPlaneList){
+
+    public void collisionTesting(List<EnemyPlane> enemyPlaneList) {
         GameFrame gameFrame = DataStore.get("gameFrame");
         for (EnemyPlane enemyPlane : enemyPlaneList) {
-            if (enemyPlane.getRectangle().intersects(this.getRectangle())){
-                enemyPlaneList.remove(enemyPlane);
+            if (enemyPlane.getRectangle().intersects(this.getRectangle())) {
+                if (gameFrame.score <20) {
+                    enemyPlane.ephp -= 25;
+                }else  if (gameFrame.score >=20 && gameFrame.score<50){
+                    enemyPlane.ephp -= 50;
+                }else if (gameFrame.score >= 50){
+                    enemyPlane.ephp -= 100;
+                }
                 gameFrame.bulletList.remove(this);
-                gameFrame.score+= enemyPlane.getType()*5;
+                if (enemyPlane.ephp<= 0){
+                    gameFrame.count++;
+                    enemyPlaneList.remove(enemyPlane);
 
-            }
+                    gameFrame.score += enemyPlane.getType() * 4;
+                }
+          }
         }
     }
 }

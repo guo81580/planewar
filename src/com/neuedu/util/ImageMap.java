@@ -3,14 +3,13 @@ package com.neuedu.util;
 import java.awt.*;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.stream.StreamSupport;
 
 
 public class ImageMap {
     private   static final Map<String, Image> map = new HashMap<>();
 
     static {
-        map.put("bg01",ImageUtil.getImage("com\\neuedu\\imgs\\bg\\bg01.png"));
+        map.put("bg01",ImageUtil.getImage("com\\neuedu\\imgs\\bg\\bg01.jpg"));
 
         map.put("my01",ImageUtil.getImage("com\\neuedu\\imgs\\plane\\my_01.png"));
 
@@ -20,8 +19,12 @@ public class ImageMap {
 
         map.put("ep01",ImageUtil.getImage("com\\neuedu\\imgs\\plane\\ep_1.png"));
         map.put("ep02",ImageUtil.getImage("com\\neuedu\\imgs\\plane\\ep_2.png"));
+        map.put("ep03",ImageUtil.getImage("com\\neuedu\\imgs\\plane\\ep_3.png"));
 
         map.put("epb01",ImageUtil.getImage("com\\neuedu\\imgs\\bullet\\epb_1.png"));
+
+        map.put("boss",ImageUtil.getImage("com\\neuedu\\imgs\\plane\\boss.png"));
+        map.put("bossb",ImageUtil.getImage("com\\neuedu\\imgs\\bullet\\bossb.png"));
 
         map.put("blood",ImageUtil.getImage("com\\neuedu\\imgs\\prop\\blood.png"));
 

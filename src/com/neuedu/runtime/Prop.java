@@ -26,9 +26,11 @@ public class Prop extends BaseSprite implements Drawable, Moveable {
 
     @Override
     public void draw(Graphics g) {
-        g.drawImage(image,getX(),getY(),image.getWidth(null),image.getHeight(null),null);
 
         move();
+        g.drawImage(image,getX(),getY(),image.getWidth(null),image.getHeight(null),null);
+
+
 
     }
 
