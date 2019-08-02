@@ -3,8 +3,6 @@ package com.neuedu;
 import com.neuedu.main.GameFrame;
 import com.neuedu.util.DataStore;
 
-import java.awt.*;
-
 public class GameStart {
 
     public static void main(String[] args) {

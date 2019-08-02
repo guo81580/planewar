@@ -1,6 +1,5 @@
 package com.neuedu.runtime;
 
-import com.neuedu.GameStart;
 import com.neuedu.base.BaseSprite;
 import com.neuedu.base.Drawable;
 import com.neuedu.base.Moveable;
@@ -17,7 +16,7 @@ public class Plane extends BaseSprite implements Drawable, Moveable {
     private  boolean up,right,down,left;
     private Image image;
 
-    private int speed=FrameConstant.GAME_SPEED*5;
+    private int speed=FrameConstant.GAME_SPEED*8;
     private boolean fire;
 
 

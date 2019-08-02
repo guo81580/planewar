@@ -20,7 +20,7 @@ public class EnemyPlane extends BaseSprite implements Drawable, Moveable {
     private Random random = new Random();
     private int type;
     public int ephp;
-    public int bosshp;
+
 
     public EnemyPlane( ) {
         this(0,0,  1);
@@ -45,7 +45,7 @@ public class EnemyPlane extends BaseSprite implements Drawable, Moveable {
         }else if (type == 2){
             ephp = 100;
         }else if (type == 5){
-            ephp = 1000;
+            ephp = 200;
         }
     }
 
@@ -71,7 +71,7 @@ public class EnemyPlane extends BaseSprite implements Drawable, Moveable {
     public void fire(){
         GameFrame gameFrame =    DataStore.get("gameFrame");
         if (getY()>0){
-            if (random.nextInt(1000)>999){
+            if (random.nextInt(1000)>995){
                 gameFrame.enemyBulletList.add(new EnemyBullet(
                         getX()+ (image.getWidth(null)/2) - ImageMap.get("epb01").getWidth(null)/2,
                         getY()+image.getHeight(null)/2 - ImageMap.get("epb01").getHeight(null)/2

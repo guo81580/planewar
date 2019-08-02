@@ -9,7 +9,7 @@ public class ImageMap {
     private   static final Map<String, Image> map = new HashMap<>();
 
     static {
-        map.put("bg01",ImageUtil.getImage("com\\neuedu\\imgs\\bg\\bg01.jpg"));
+        map.put("bg01",ImageUtil.getImage("com\\neuedu\\imgs\\bg\\bg01.png"));
 
         map.put("my01",ImageUtil.getImage("com\\neuedu\\imgs\\plane\\my_01.png"));
 
